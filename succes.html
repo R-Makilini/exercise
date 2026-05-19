@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Welcome</title>
+</head>
+
+<body class="flex justify-center items-center h-screen bg-purple-100">
+
+    <div class="bg-white p-10 rounded-xl shadow-lg text-center">
+
+        <h1
+        id="welcomeMsg"
+        class="text-3xl font-bold text-green-600">
+        </h1>
+
+        <button
+        onclick="openParentForm()"
+        class="bg-green-700 text-white px-6 py-3 rounded mt-5">
+
+        Family Details
+
+        </button>
+
+    </div>
+     
+
+<script>
+
+    let username =
+    localStorage.getItem("currentUser");
+
+    document.getElementById("welcomeMsg")
+    .innerText =
+
+    username +
+    ",You are successfully logged in.";
+
+    function openParentForm(){
+
+        window.location.href =
+        "family.html";
+    }
+
+</script>
+
+</body>
+</html>

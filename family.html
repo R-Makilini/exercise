@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Family Form</title>
+</head>
+
+<body class="bg-purple-100 min-h-screen p-10">
+
+<div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+
+    <h1 class="text-2xl font-bold mb-4 text-purple-700">
+        Family Details
+    </h1>
+
+    <label for="name">Name</label>
+    <input id="name" placeholder=" Enter Name"class="w-full border p-2 mb-2 rounded">
+    
+    <label for="phonenumber">Phone Number</label>
+    <input id="phone" placeholder="Enter Phone"class="w-full border p-2 mb-2 rounded">
+    
+    <label for="role">Role in Family</label>
+    <input id="role" placeholder="Enter the Role in Family"
+    class="w-full border p-2 mb-2 rounded">
+
+    <button onclick="addData()"
+    class="bg-purple-700 text-white px-4 py-2 rounded w-full">
+        + Add
+    </button>
+
+</div>
+
+
+<div id="list" class="max-w-xl mx-auto mt-6"></div>
+
+<script>
+
+let editIndex = -1;
+
+let family =
+JSON.parse(localStorage.getItem("family")) || [];
+
+
+function showData(){
+
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    family.forEach((item, index)=>{
+
+        list.innerHTML += `
+        <div class="bg-white p-4 mt-3 rounded shadow flex justify-between items-center">
+
+            <div>
+                <p><b>${item.name}</b></p>
+                <p>${item.phone}</p>
+                <p>${item.role}</p>
+            </div>
+
+            <div class="space-x-2">
+
+                <button onclick="editData(${index})"
+                class="bg-blue-500 text-white px-3 py-1 rounded">
+                    Edit
+                </button>
+
+                <button onclick="deleteData(${index})"
+                class="bg-red-500 text-white px-3 py-1 rounded">
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+        `;
+    });
+}
+
+
+function addData(){
+
+    let name =
+    document.getElementById("name").value;
+
+    let phone =
+    document.getElementById("phone").value;
+
+    let role =
+    document.getElementById("role").value;
+
+    let obj = {name, phone, role};
+
+    
+    if(editIndex === -1){
+
+        family.push(obj);
+
+    } else {
+
+        family[editIndex] = obj;
+        editIndex = -1;
+    }
+
+    localStorage.setItem("family", JSON.stringify(family));
+
+    clearForm();
+    showData();
+}
+
+
+function deleteData(index){
+
+    family.splice(index, 1);
+
+    localStorage.setItem("family", JSON.stringify(family));
+
+    showData();
+}
+
+
+function editData(index){
+
+    document.getElementById("name").value =
+    family[index].name;
+
+    document.getElementById("phone").value =
+    family[index].phone;
+
+    document.getElementById("role").value =
+    family[index].role;
+
+    editIndex = index;
+}
+
+
+function clearForm(){
+
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("role").value = "";
+}
+
+
+showData();
+
+</script>
+
+</body>
+</html>

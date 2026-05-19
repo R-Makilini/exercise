@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Not Eligible</title>
+</head>
+
+<body class="bg-gradient-to-r from-blue-200 to-purple-300 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-10 rounded-2xl shadow-xl text-center">
+
+    <h1 class="text-4xl font-bold text-red-600 mb-4">
+      Not Eligible
+    </h1>
+
+    <p class="text-gray-700 text-lg mb-3">
+      You are not eligible to register now.
+    </p>
+
+    <p id="years" class="text-purple-700 font-bold text-xl"></p>
+
+  </div>
+
+  <script>
+
+    let remaining = localStorage.getItem("remainingYears");
+
+    document.getElementById("years").innerHTML =
+      "You can register after " + remaining + " year(s).";
+
+  </script>
+
+</body>
+</html>
