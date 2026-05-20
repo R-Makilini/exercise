@@ -1,11 +1,9 @@
 function login(){
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    let input = document.getElementById("loginInput").value.trim();
-    let password = document.getElementById("loginPassword").value.trim();
-
-    let found = users.find(user =>
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const input = document.getElementById("loginInput").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const found = users.find(user =>
         (user.email === input || user.phonenumber === input) &&
         user.password === password
     );
@@ -18,9 +16,6 @@ function login(){
 
         window.location.href =
         "succes.html";
-
-        // alert("Login Successful");
-        // msg.innerText = "";
     }
     else{
 
